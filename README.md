@@ -203,3 +203,89 @@ par
 //
 
 ````
+
+## BONUS DU DEVELOPPEUR
+```java 
+     public boolean insert(Sport sport)
+     {
+
+        PreparedStatement myStatement = this.database.preparableStatement("INSERT INTO sport (id, name, required_participants) VALUES (?,?,?)");
+        try
+         {
+
+            myStatement.setInt(1, sport.getId());
+            myStatement.setString(2, sport.getName());
+            myStatement.setInt(3, sport.getParticipants());
+            myStatement.executeUpdate();
+            return true;
+
+         }
+         catch(SQLException e)
+         {
+            System.err.println("Erreur SQL insertion table : " + e.getMessage());
+            return false;
+            
+         }
+         
+
+
+
+    }
+
+    public boolean update(int id, Sport sport)
+    {
+
+        PreparedStatement myStatement = this.database.preparableStatement("UPDATE sport\r\n" + //
+                        "SET name = ?, required_participants = ?\r\n" + //
+                        "WHERE id = ?;\r\n" + //
+                        "");
+        try
+         {
+
+            myStatement.setString(1, sport.getName());
+            myStatement.setInt(2, sport.getParticipants());
+            myStatement.setInt(3, id);
+            myStatement.executeUpdate();
+            return true;
+
+         }
+         catch(SQLException e)
+         {
+            System.err.println("Erreur SQL update table : " + e.getMessage());
+            return false;
+            
+         }
+         
+
+
+
+    }
+    public boolean delete(int id)
+    {
+
+        PreparedStatement myStatement = this.database.preparableStatement("DELETE FROM sport WHERE id = ?");
+        try
+         {
+            myStatement.setInt(1, id);
+            myStatement.executeUpdate();
+            return true;
+
+         }
+         catch(SQLException e)
+         {
+            System.err.println("Erreur SQL update table : " + e.getMessage());
+            return false;
+            
+         }
+         
+
+
+
+    }
+  
+
+
+
+```
+Nous pouvons insérer de nouveaux éléments dans BDD :
+  ![image](https://github.com/ThomyG07/Java_BDD/assets/93085354/c6a30bdb-7cca-4eda-9148-cdfd835ed82a)
